@@ -3,6 +3,7 @@
     Copy messenger application
   </header>
 
+  <!-- sidebar -->
   <div class="grid-container">
     <div class="grid-item">
       <div class="icon">
@@ -12,22 +13,23 @@
     </div>
 
     <div class="grid-item">
-      <!-- 유저 조회 모달 -->
+      <!-- 유저(친구) 조회 모달 -->
       <div v-if="personmodal == true">
         <div v-for="(user, index) in users" :key="index" class="user-list" @click="chatmodalOn(user)">
           <img :src="require(`@/assets/img/usericon${user.icon}.png`)" alt="usericon"  class="usericon">
           <h4 style="display:inline-block;">{{ user.user }}</h4>
         </div>
       </div>
-      <!-- 채팅방 목록 모달 -->
+      <!-- 내 채팅방 목록 모달 -->
       <div v-if="messengermodal == true">
         <div v-for="(chat, index) in chats" :key="index" class="chat-list" @click="chatmodalOn();">
-          <h4 style="margin: 0">{{ chat.title }}</h4>
+          <h4 style="margin: 0">{{ chat.chatID }}</h4>
           <p style="margin: 5px">{{ chat.content }}</p>
         </div>
       </div>
     </div>
 
+    <!-- 채팅창 -->
     <div class="grid-item">
       <!-- 기본 값 -->
       <div class="chat-default" v-if="chatmodal == false">
@@ -51,6 +53,7 @@
         </div>
       </div>
     </div>
+    <!-- 채팅창 끝 -->
   </div>
 
   <footer>
@@ -72,12 +75,15 @@ export default {
       personmodal: false,
       messengermodal: true,
       users : users,
+      // axios로 받아와서 chatID, chatContet로 구분하여 기입.
       chats: [
-      { title: '채팅방 1', content: '채팅 내용 1' },
-      { title: '채팅방 2', content: '채팅 내용 2' },
-      { title: '채팅방 3', content: '채팅 내용 3' },
+      { chatID: '채팅방 1', content: '채팅 내용 1' },
+      { chatID: '채팅방 2', content: '채팅 내용 2' },
+      { chatID: '채팅방 3', content: '채팅 내용 3' },
       // 다른 채팅방에 대한 정보를 추가할 수 있습니다.
       ],
+
+      // chatID에 해당하는 채팅 내용.
       contents: [
         '채팅내용',
         '채팅내용',
